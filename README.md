@@ -103,4 +103,25 @@ function findPairWithGivenSum(arr, targetSum) {
 ## 5
 Интересный способ посортировать массив положительных целых чисел. Мы число n добавляем в результирующий массив с таймаутом n, то есть чем больше число, тем позже мы его добавим, и получим массив отсортированный по возрастанию.
 
+## 5*
 
+```javascript
+function func(arr, call_back) {
+	
+  if (!Array.isArray(arr) || arr.some(it => parseInt(it) != it || it < 0)) {
+    call_back(null, "Неверный формат входящих данных, должен быть массив положительных чисел");
+  }
+  
+  const delay = (ms) => new Promise(resolve => setTimeout(resolve, ms));
+  
+  let res = [];
+  for (let i = 0; i < arr.length; i++) {
+    delay(arr[i]).then(() => {
+      res.push(arr[i]);
+      if (res.length === arr.length) {
+        call_back(res, null)
+      }
+    });
+  }
+}
+```

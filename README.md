@@ -125,3 +125,28 @@ function func(arr, call_back) {
   }
 }
 ```
+
+
+## 6
+
+```javascript
+import { readdir, readFile } from 'node:fs/promises';
+import { join } from 'path';
+
+
+const dir = './files';
+const s = 'abc';
+const re = new RegExp(`<p>[^]*?${s}[^]*?</p>`, 'g');
+
+readdir(dir).then(
+  files => {
+    for (let f of files) {
+      readFile(join(dir, f), 'utf-8')
+        .then(content => console.log(f + ' : ' + (content.match(re)?.length ?? 'none')))
+    }
+  },
+  err => {
+    console.log(err);
+  }
+);
+```

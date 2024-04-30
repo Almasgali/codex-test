@@ -1,5 +1,51 @@
 # codex-test
 
+## 1
+
+### 1.1
+```SQL
+SELECT id FROM departments dp
+WHERE NOT EXISTS (
+	SELECT 1 FROM dep_names dn WHERE dn.department_id = dp.id 
+);
+```
+
+### 1.2
+```SQL
+SELECT dp.id FROM departments dp
+INNER JOIN dep_names dn ON dp.id = dn.department_id
+GROUP BY dp.id
+HAVING COUNT(dn.id) >= 2;
+```
+
+## 2
+Что то вроде:
+```
+table object {
+  id,
+  timestamp,
+  parent_id
+}
+
+table contact {
+  id,
+  object_id,
+  server,
+  email
+}
+
+table user {
+  id,
+  contact_id,
+  name
+}
+
+table address {
+  id,
+  object_id,
+  addr
+}
+```
 ## 3
 ```javascript
 function isSquare(x) {
@@ -49,9 +95,12 @@ function findPairWithGivenSum(arr, targetSum) {
       }
     }
   }
+  return [];
 }
 ```
-Если мапа реализована на хеш-таблице, то за линию складываем все числа, и за O(1) для каждого числа проверяем, можно ли составить с ним нужную пару.
+Если мапа реализована на хеш-таблице, то за линию складываем в нее все числа, и за O(1) для каждого числа проверяем, можно ли составить с ним нужную пару.
 
 ## 5
-Интересный способ посортировать массив положительных целых чисел. Мы число n добавляем в результирующий массив с таймаутом n, то есть чем больше число, тем позже мы его добавим, и получим массив отсортированный по возрастанию.++
+Интересный способ посортировать массив положительных целых чисел. Мы число n добавляем в результирующий массив с таймаутом n, то есть чем больше число, тем позже мы его добавим, и получим массив отсортированный по возрастанию.
+
+
